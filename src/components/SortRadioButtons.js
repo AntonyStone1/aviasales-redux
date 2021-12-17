@@ -2,7 +2,8 @@
 import * as React from 'react'
 import store from 'store/store'
 import { makeStyles } from '@mui/styles'
-import SortDataPrice from 'store/action/sotrDataPrice'
+import sortDataPrice from 'store/action/sortDataPrice'
+import sortDataFast from 'store/action/sortDataFast'
 import { Container } from '../../node_modules/@material-ui/core/index'
 
 const useStyles = makeStyles({
@@ -30,7 +31,10 @@ const useStyles = makeStyles({
 })
 
 const sortHandle = () => {
-  store.dispatch(SortDataPrice)
+  store.dispatch(sortDataPrice)
+}
+const sortHandleFast = () => {
+  store.dispatch(sortDataFast)
 }
 
 export default function SortRadioButtons() {
@@ -54,7 +58,7 @@ export default function SortRadioButtons() {
         name="sort-btn"
         className={styles.radioBtn}
         id="2"
-        onClick={sortHandle}
+        onClick={sortHandleFast}
       />
       <label htmlFor="2" className={styles.label}>
         САМЫЙ БЫСТРЫЙ

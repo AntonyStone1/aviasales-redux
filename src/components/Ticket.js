@@ -1,11 +1,9 @@
-/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import { Container, Typography } from '../../node_modules/@material-ui/core/index'
-// eslint-disable-next-line import/no-unresolved
-import { ReactComponent as YourSvg } from '../img/ticketLogo/S7 Logo.svg'
+import { ReactComponent as YourSvg } from '../img/S7_Logo.svg'
 
 const useStyles = makeStyles({
   container: {

@@ -1,4 +1,4 @@
-import apiClient from '../../utils/apiClient'
+import apiClient from './apiClient'
 import PATHS from './Path'
 
 // Auth
