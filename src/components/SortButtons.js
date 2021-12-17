@@ -7,7 +7,10 @@ import { Container } from '@material-ui/core'
 
 const useStyles = makeStyles({
   btnsContainer: {
-    marginBottom: '5%',
+    marginBottom: '3%',
+  },
+  btn: {
+    height: '50px',
   },
 })
 
@@ -22,8 +25,12 @@ const SortButtons = () => {
         fullWidth
       >
         <Button className={styles.btn}>Самый дешевый</Button>
-        <Button disabled>Самый быстрый</Button>
-        <Button disabled>Оптимальный</Button>
+        <Button className={styles.btn} disabled>
+          Самый быстрый
+        </Button>
+        <Button className={styles.btn} disabled>
+          Оптимальный
+        </Button>
       </ButtonGroup>
     </Container>
   )

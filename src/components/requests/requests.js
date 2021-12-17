@@ -4,7 +4,6 @@ import PATHS from './Path'
 // Auth
 // export const login = (data) => apiClient.post(PATHS.login, { data })
 export const getKey = () => apiClient.get(PATHS.getKey)
-export const getTicketsData = () => apiClient.get(PATHS.getTicketsData + getKey())
 export const resetPassword = (password) => {
   const { data, token } = password
   return apiClient.post(`${PATHS.resetPassword}?token=${token}`, { data })

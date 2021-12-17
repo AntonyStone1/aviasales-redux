@@ -11,15 +11,19 @@ const useStyles = makeStyles({
   container: {
     display: 'flex',
     justifyContent: 'center',
-    marginBottom: '5%',
+    marginBottom: '3%',
   },
   priceLogo: {
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    padding: '20px',
+  },
+  priceText: {
+    color: '#2196F3',
   },
   ticketInfo: {
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     padding: '20px',
   },
   boxStyle: {
@@ -27,6 +31,7 @@ const useStyles = makeStyles({
   },
   ticketContainer: {
     borderRadius: '5px',
+    backgroundColor: '#fff',
   },
 })
 
@@ -38,7 +43,9 @@ const Ticket = ({ ticketData }) => {
     <Container className={styled.container}>
       <Box sx={{ boxShadow: 3 }} className={styled.ticketContainer}>
         <Box className={styled.priceLogo}>
-          <Typography>{ticketData.price} P</Typography>
+          <Typography variant="h4" className={styled.priceText}>
+            {ticketData.price} P
+          </Typography>
           <YourSvg />
         </Box>
         <Box className={styled.ticketInfo}>
