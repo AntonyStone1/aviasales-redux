@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
 import store from 'store/store'
-import { connect } from 'react-redux'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import { ReactComponent as Logo } from 'img/Logo.svg'
@@ -13,6 +12,8 @@ import getTicketsData from './store/action/getTicketsData'
 const useStyles = makeStyles({
   appContainer: {
     display: 'flex !important',
+    maxWidth: '950px',
+    margin: '0 auto',
   },
   logoContainer: {
     borderRadius: '5px',
@@ -29,15 +30,15 @@ function App() {
     store.dispatch(getTicketsData)
   }, [])
   return (
-    <Container>
+    <>
       <Box className={styles.logoContainer}>
         <Logo className={styles.logo} />
       </Box>
-      <Container className={styles.appContainer}>
+      <div className={styles.appContainer}>
         <CheckboxPanel />
         <TicketsList />
-      </Container>
-    </Container>
+      </div>
+    </>
   )
 }
 

@@ -14,6 +14,8 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     width: '100% !important',
     marginBottom: '5%',
+    paddingRight: '0 !important',
+    paddingLeft: '0 !important',
   },
 })
 

@@ -9,6 +9,8 @@ import { Container } from '../../node_modules/@material-ui/core/index'
 const useStyles = makeStyles({
   container: {
     display: 'flex !important',
+    height: '50px',
+    marginBottom: '3%',
     borderRadius: '5px !important',
   },
   radioBtn: {
@@ -24,9 +26,15 @@ const useStyles = makeStyles({
     lineHeight: '20px',
     height: '50px',
     width: '33%',
-    marginBottom: '3%',
     backgroundColor: '#fff',
     border: '1px solid #DFE5EC',
+  },
+  border: {
+    borderRadius: '5px',
+  },
+  rightBtn: {
+    borderBottomRightRadius: '5px',
+    borderTopRightRadius: '5px',
   },
 })
 
@@ -40,40 +48,42 @@ const sortHandleFast = () => {
 export default function SortRadioButtons() {
   const styles = useStyles()
   return (
-    <Container className={styles.container}>
-      <input
-        type="radio"
-        value="chip"
-        name="sort-btn"
-        className={styles.radioBtn}
-        id="1"
-        onClick={sortHandle}
-      />
-      <label htmlFor="1" className={styles.label}>
-        САМЫЙ ДЕШЕВЫЙ
-      </label>
-      <input
-        type="radio"
-        value="fast"
-        name="sort-btn"
-        className={styles.radioBtn}
-        id="2"
-        onClick={sortHandleFast}
-      />
-      <label htmlFor="2" className={styles.label}>
-        САМЫЙ БЫСТРЫЙ
-      </label>
-      <input
-        type="radio"
-        value="optimal"
-        name="sort-btn"
-        className={styles.radioBtn}
-        id="3"
-        onClick={sortHandle}
-      />
-      <label htmlFor="3" className={styles.label}>
-        ОПТИМАЛЬНЫЙ
-      </label>
+    <Container>
+      <div className={styles.container}>
+        <input
+          type="radio"
+          value="chip"
+          name="sort-btn"
+          className={styles.radioBtn}
+          id="1"
+          onClick={sortHandle}
+        />
+        <label htmlFor="1" className={styles.label}>
+          САМЫЙ ДЕШЕВЫЙ
+        </label>
+        <input
+          type="radio"
+          value="fast"
+          name="sort-btn"
+          className={styles.radioBtn}
+          id="2"
+          onClick={sortHandleFast}
+        />
+        <label htmlFor="2" className={styles.label}>
+          САМЫЙ БЫСТРЫЙ
+        </label>
+        <input
+          type="radio"
+          value="optimal"
+          name="sort-btn"
+          className={styles.radioBtn}
+          id="3"
+          onClick={sortHandle}
+        />
+        <label htmlFor="3" className={styles.label}>
+          ОПТИМАЛЬНЫЙ
+        </label>
+      </div>
     </Container>
   )
 }

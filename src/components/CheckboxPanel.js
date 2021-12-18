@@ -15,12 +15,15 @@ const useStyles = makeStyles({
     textAlign: 'center',
   },
   checkboxContainer: {
-    width: '40% !important',
-    borderRadius: '5px',
+    width: '57% !important',
+    paddingRight: '0 !important',
   },
   checkboxPanel: {
     backgroundColor: '#fff',
     paddingBottom: '10px',
+    borderRadius: '5px',
+    boxShadow:
+      '0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);',
   },
 })
 
@@ -31,7 +34,7 @@ const CheckboxPanel = () => {
   return (
     <>
       <Container className={styles.checkboxContainer}>
-        <Box sx={{ boxShadow: 3 }} className={styles.checkboxPanel}>
+        <Box className={styles.checkboxPanel}>
           <Typography variant="h6" className={styles.checkboxHeading}>
             Количество пересадок
           </Typography>
