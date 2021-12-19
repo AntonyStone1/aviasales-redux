@@ -4,6 +4,7 @@ import store from 'store/store'
 import { makeStyles } from '@mui/styles'
 import sortDataPrice from 'store/action/sortDataPrice'
 import sortDataFast from 'store/action/sortDataFast'
+import sortDataOptimal from 'store/action/sortDataOptimal'
 import { Container } from '../../node_modules/@material-ui/core/index'
 
 const useStyles = makeStyles({
@@ -26,6 +27,7 @@ const useStyles = makeStyles({
     lineHeight: '20px',
     height: '50px',
     width: '33%',
+    color: '#4A4A4A',
     backgroundColor: '#fff',
     border: '1px solid #DFE5EC',
   },
@@ -38,11 +40,14 @@ const useStyles = makeStyles({
   },
 })
 
-const sortHandle = () => {
+const sortHandlePrice = () => {
   store.dispatch(sortDataPrice)
 }
 const sortHandleFast = () => {
   store.dispatch(sortDataFast)
+}
+const sortHandleOptimal = () => {
+  store.dispatch(sortDataOptimal)
 }
 
 export default function SortRadioButtons() {
@@ -56,7 +61,7 @@ export default function SortRadioButtons() {
           name="sort-btn"
           className={styles.radioBtn}
           id="1"
-          onClick={sortHandle}
+          onClick={sortHandlePrice}
         />
         <label htmlFor="1" className={styles.label}>
           САМЫЙ ДЕШЕВЫЙ
@@ -78,7 +83,7 @@ export default function SortRadioButtons() {
           name="sort-btn"
           className={styles.radioBtn}
           id="3"
-          onClick={sortHandle}
+          onClick={sortHandleOptimal}
         />
         <label htmlFor="3" className={styles.label}>
           ОПТИМАЛЬНЫЙ

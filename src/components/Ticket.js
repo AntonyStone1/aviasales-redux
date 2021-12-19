@@ -48,16 +48,7 @@ const Ticket = ({ ticketData }) => {
   const durationTicket1 = new Date(ticketData.segments[0].duration)
   const dateTicket2 = new Date(ticketData.segments[1].date)
   const durationTicket2 = new Date(ticketData.segments[1].duration)
-  console.log(
-    ticketData.price
-      .toString()
-      .split('')
-      .map((item, index) => {
-        if (index === 2) return ` ${item}`
-        return item
-      })
-      .join(''),
-  )
+
   const generatePriceIndent = (price) =>
     price
       .toString()

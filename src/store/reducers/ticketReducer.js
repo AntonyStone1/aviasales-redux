@@ -1,5 +1,5 @@
 import initialState from 'store/initialState'
-import ACTIONS from '../actionTypes/actionTypes'
+import ACTIONS from 'store/actionTypes/actionTypes'
 
 function ticketReducer(state = initialState, action) {
   console.log('action', action)
@@ -23,6 +23,18 @@ function ticketReducer(state = initialState, action) {
       return {
         ...state,
         ticketsData: currentStateFast,
+      }
+    }
+    case ACTIONS.SORT_DATA_OPTIMAL: {
+      console.log(ACTIONS.SORT_DATA_OPTIMAL)
+      const currentStateOptimal = action.payload.sort(
+        // eslint-disable-next-line prettier/prettier
+        (a, b) => a.price + a.segments[0].duration - (b.price + b.segments[0].duration),
+      )
+      console.log('curretnOptimal', currentStateOptimal)
+      return {
+        ...state,
+        ticketsData: currentStateOptimal,
       }
     }
     default:
