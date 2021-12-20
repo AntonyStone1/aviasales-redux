@@ -6,13 +6,12 @@ import Box from '@mui/material/Box'
 import { ReactComponent as Logo } from 'img/Logo.svg'
 import CheckboxPanel from 'components/CheckboxPanel'
 import TicketsList from 'components/TicketsList'
-import { Container } from '../node_modules/@material-ui/core/index'
 import getTicketsData from './store/action/getTicketsData'
 
 const useStyles = makeStyles({
   appContainer: {
     display: 'flex !important',
-    maxWidth: '950px',
+    maxWidth: '800px',
     margin: '0 auto',
   },
   logoContainer: {
@@ -21,6 +20,7 @@ const useStyles = makeStyles({
   logo: {
     width: '100%',
     margin: '0 auto',
+    marginBottom: '1.8%',
   },
 })
 
@@ -29,6 +29,7 @@ function App() {
   useEffect(() => {
     store.dispatch(getTicketsData)
   }, [])
+  console.log('state', store.getState())
   return (
     <>
       <Box className={styles.logoContainer}>

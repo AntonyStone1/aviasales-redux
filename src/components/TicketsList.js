@@ -12,7 +12,8 @@ const useStyles = makeStyles({
   container: {
     display: 'flex !important',
     flexDirection: 'column',
-    width: '100% !important',
+    width: '70% !important',
+    margin: '0 !important',
     marginBottom: '5%',
     paddingRight: '0 !important',
     paddingLeft: '0 !important',

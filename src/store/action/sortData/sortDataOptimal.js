@@ -1,5 +1,5 @@
 import store from 'store/store'
-import actionTypes from '../actionTypes/actionTypes'
+import actionTypes from 'store/actionTypes/actionTypes'
 
 async function sortDataOptimal(dispatch) {
   console.log('optimal', store.getState()?.ticketsData)
