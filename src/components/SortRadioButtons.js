@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import store from 'store/store'
 import { makeStyles } from '@mui/styles'
 import sortDataPrice from 'store/action/sortData/sortDataPrice'
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     borderRadius: '5px !important',
   },
   radioBtn: {
-    display: 'none',
+    // display: 'none',
   },
   label: {
     display: 'flex',
@@ -41,18 +41,30 @@ const useStyles = makeStyles({
   },
 })
 
-const sortHandlePrice = () => {
-  store.dispatch(sortDataPrice)
-}
-const sortHandleFast = () => {
-  store.dispatch(sortDataFast)
-}
-const sortHandleOptimal = () => {
-  store.dispatch(sortDataOptimal)
-}
-
 export default function SortRadioButtons() {
   const styles = useStyles()
+  const [isChecked, setChecked] = useState({
+    price: true,
+    speed: false,
+    optimal: false,
+  })
+  useEffect(() => {
+    store.dispatch(sortDataPrice)
+    console.log(1)
+  }, [])
+  const sortHandlePrice = () => {
+    store.dispatch(sortDataPrice)
+    setChecked((prev) => !prev.price)
+  }
+  const sortHandleFast = () => {
+    store.dispatch(sortDataFast)
+    setChecked((prev) => !prev.speed)
+  }
+  const sortHandleOptimal = () => {
+    store.dispatch(sortDataOptimal)
+    setChecked((prev) => !prev.optimal)
+  }
+
   return (
     <Container className={styles.container}>
       <input
@@ -61,7 +73,8 @@ export default function SortRadioButtons() {
         name="sort-btn"
         className={styles.radioBtn}
         id="1"
-        onClick={sortHandlePrice}
+        onChange={sortHandlePrice}
+        checked={isChecked.price}
       />
       <label htmlFor="1" className={styles.label}>
         САМЫЙ ДЕШЕВЫЙ
@@ -73,6 +86,7 @@ export default function SortRadioButtons() {
         className={styles.radioBtn}
         id="2"
         onClick={sortHandleFast}
+        checked={isChecked.speed}
       />
       <label htmlFor="2" className={styles.label}>
         САМЫЙ БЫСТРЫЙ
@@ -84,6 +98,7 @@ export default function SortRadioButtons() {
         className={styles.radioBtn}
         id="3"
         onClick={sortHandleOptimal}
+        checked={isChecked.optimal}
       />
       <label htmlFor="3" className={styles.label}>
         ОПТИМАЛЬНЫЙ

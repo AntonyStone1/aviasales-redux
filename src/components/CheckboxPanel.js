@@ -74,7 +74,13 @@ const CheckboxPanel = () => {
           </Typography>
           <div className={styles.container}>
             <label htmlFor="all">
-              <Checkbox {...label} id="all" className={styles.checkbox} onClick={clickHandlerAll} />
+              <Checkbox
+                {...label}
+                name="ALL"
+                id="all"
+                className={styles.checkbox}
+                onChange={clickHandlerAll}
+              />
               Все
             </label>
             <label htmlFor="directFlight">
@@ -82,7 +88,7 @@ const CheckboxPanel = () => {
                 {...label}
                 id="directFlight"
                 className={styles.checkbox}
-                onClick={clickHandlerNoTransfer}
+                onChange={clickHandlerNoTransfer}
               />
               Без пересадок
             </label>
@@ -90,7 +96,7 @@ const CheckboxPanel = () => {
               <Checkbox
                 {...label}
                 id="1_dirrect"
-                onClick={clickHandlerOne}
+                onChange={clickHandlerOne}
                 className={styles.checkbox}
                 che
               />
@@ -101,7 +107,7 @@ const CheckboxPanel = () => {
                 {...label}
                 id="2_dirrect"
                 className={styles.checkbox}
-                onClick={clickHandlerTwo}
+                onChange={clickHandlerTwo}
               />
               2 пересадки
             </label>
@@ -110,7 +116,7 @@ const CheckboxPanel = () => {
                 {...label}
                 id="3_dirrect"
                 className={styles.checkbox}
-                onClick={clickHandlerThree}
+                onChange={clickHandlerThree}
               />
               3 пересадки
             </label>

@@ -7,6 +7,7 @@ const useStyles = makeStyles({
   paginationBtn: {
     width: '100% !important',
     height: '50px',
+    marginBottom: '30px !important',
   },
 })
 
