@@ -30,6 +30,7 @@ function App() {
     store.dispatch(getTicketsData)
   }, [])
   console.log('state', store.getState())
+  console.log(1)
   return (
     <>
       <Box className={styles.logoContainer}>
