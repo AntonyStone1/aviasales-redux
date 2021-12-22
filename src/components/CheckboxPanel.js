@@ -1,14 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable arrow-body-style */
-import React from 'react'
-import filterDataOne from 'store/action/filterData/filterDataOne'
-import filterDataTwo from 'store/action/filterData/filterDataTwo'
-import filterDataThree from 'store/action/filterData/filterDataThree'
-import filterDataAll from 'store/action/filterData/filterDataAll'
-import filterDataNoTransfer from 'store/action/filterData/filterDataNoTransfer'
-import store from 'store/store'
+import React, { useState } from 'react'
 import Checkbox from '@mui/material/Checkbox'
 import { makeStyles } from '@mui/styles'
+import { Link, useLocation } from 'react-router-dom'
+import useQuery from 'hooks/useQuery'
 import { Typography, Container, Box } from '../../node_modules/@material-ui/core/index'
 
 const useStyles = makeStyles({
@@ -31,16 +26,19 @@ const useStyles = makeStyles({
     paddingRight: '0 !important',
   },
   checkboxPanel: {
-    height: '222px',
+    height: '250px',
     backgroundColor: '#fff',
-    padding: '20px 20px 10px 20px',
+    // padding: '20px 20px 10px 20px',
     borderRadius: '5px',
     boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
   },
   checkbox: {
-    padding: '0 !important',
-    paddingBottom: '10px !important',
-    paddingRight: '14px !important',
+    // padding: '0 !important',
+    padding: '10px 20px 10px 20px',
+  },
+  link: {
+    textDecoration: 'none',
+    color: '#4A4A4A',
   },
 })
 
@@ -48,21 +46,17 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
 const CheckboxPanel = () => {
   const styles = useStyles()
+  const [isChecked, setChecked] = useState({
+    transferAll: false,
+    noTransfer: false,
+    transferOne: false,
+    transferTwo: false,
+    transferThree: false,
+  })
 
-  const clickHandlerAll = () => {
-    store.dispatch(filterDataAll)
-  }
-  const clickHandlerNoTransfer = () => {
-    store.dispatch(filterDataNoTransfer)
-  }
-  const clickHandlerOne = () => {
-    store.dispatch(filterDataOne)
-  }
-  const clickHandlerTwo = () => {
-    store.dispatch(filterDataTwo)
-  }
-  const clickHandlerThree = () => {
-    store.dispatch(filterDataThree)
+  const query = useQuery()
+  const clickHandle = (e) => {
+    setChecked((prev) => ({ ...prev, [e.target.name]: !prev[e.target.name] }))
   }
 
   return (
@@ -73,53 +67,69 @@ const CheckboxPanel = () => {
             Количество пересадок
           </Typography>
           <div className={styles.container}>
-            <label htmlFor="all">
+            <Link to="/home?param=transferAll" className={styles.link}>
               <Checkbox
                 {...label}
-                name="ALL"
+                name="transferAll"
                 id="all"
                 className={styles.checkbox}
-                onChange={clickHandlerAll}
+                onClick={clickHandle}
+                checked={isChecked.transferAll}
               />
               Все
-            </label>
-            <label htmlFor="directFlight">
-              <Checkbox
-                {...label}
-                id="directFlight"
-                className={styles.checkbox}
-                onChange={clickHandlerNoTransfer}
-              />
-              Без пересадок
-            </label>
-            <label htmlFor="1_dirrect">
-              <Checkbox
-                {...label}
-                id="1_dirrect"
-                onChange={clickHandlerOne}
-                className={styles.checkbox}
-                che
-              />
-              1 пересадка
-            </label>
-            <label htmlFor="2_dirrect">
-              <Checkbox
-                {...label}
-                id="2_dirrect"
-                className={styles.checkbox}
-                onChange={clickHandlerTwo}
-              />
-              2 пересадки
-            </label>
-            <label htmlFor="3_dirrect">
-              <Checkbox
-                {...label}
-                id="3_dirrect"
-                className={styles.checkbox}
-                onChange={clickHandlerThree}
-              />
-              3 пересадки
-            </label>
+            </Link>
+            <Link to="/home?param=noTransfer">
+              <label htmlFor="directFlight">
+                <Checkbox
+                  {...label}
+                  name="noTransfer"
+                  id="directFlight"
+                  className={styles.checkbox}
+                  onClick={clickHandle}
+                  checked={isChecked.noTransfer}
+                />
+                Без пересадок
+              </label>
+            </Link>
+            <Link to="/home?param=transferOne">
+              <label htmlFor="1_dirrect">
+                <Checkbox
+                  {...label}
+                  name="transferOne"
+                  id="1_dirrect"
+                  className={styles.checkbox}
+                  onClick={clickHandle}
+                  checked={isChecked.transferOne}
+                />
+                1 пересадка
+              </label>
+            </Link>
+            <Link to="/home?param=transferTwo">
+              <label htmlFor="2_dirrect">
+                <Checkbox
+                  {...label}
+                  name="transferTwo"
+                  id="2_dirrect"
+                  className={styles.checkbox}
+                  onClick={clickHandle}
+                  checked={isChecked.transferTwo}
+                />
+                2 пересадки
+              </label>
+            </Link>
+            <Link to="/home?param=transferThree">
+              <label htmlFor="3_dirrect">
+                <Checkbox
+                  {...label}
+                  name="transferThree"
+                  id="3_dirrect"
+                  className={styles.checkbox}
+                  onClick={clickHandle}
+                  checked={isChecked.transferThree}
+                />
+                3 пересадки
+              </label>
+            </Link>
           </div>
         </Box>
       </Container>

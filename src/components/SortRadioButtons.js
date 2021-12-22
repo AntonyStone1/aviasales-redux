@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import store from 'store/store'
 import { makeStyles } from '@mui/styles'
 import sortDataPrice from 'store/action/sortData/sortDataPrice'
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     borderRadius: '5px !important',
   },
   radioBtn: {
-    // display: 'none',
+    display: 'none',
   },
   label: {
     display: 'flex',
@@ -44,25 +44,22 @@ const useStyles = makeStyles({
 export default function SortRadioButtons() {
   const styles = useStyles()
   const [isChecked, setChecked] = useState({
-    price: true,
+    price: false,
     speed: false,
     optimal: false,
   })
-  useEffect(() => {
-    store.dispatch(sortDataPrice)
-    console.log(1)
-  }, [])
+
   const sortHandlePrice = () => {
     store.dispatch(sortDataPrice)
-    setChecked((prev) => !prev.price)
+    // setChecked((prev) => ({ ...prev, price: true }))
   }
   const sortHandleFast = () => {
     store.dispatch(sortDataFast)
-    setChecked((prev) => !prev.speed)
+    // setChecked((prev) => !prev.speed)
   }
   const sortHandleOptimal = () => {
     store.dispatch(sortDataOptimal)
-    setChecked((prev) => !prev.optimal)
+    // setChecked((prev) => !prev.optimal)
   }
 
   return (
@@ -74,7 +71,7 @@ export default function SortRadioButtons() {
         className={styles.radioBtn}
         id="1"
         onChange={sortHandlePrice}
-        checked={isChecked.price}
+        // checked={isChecked.price}
       />
       <label htmlFor="1" className={styles.label}>
         САМЫЙ ДЕШЕВЫЙ
@@ -86,7 +83,7 @@ export default function SortRadioButtons() {
         className={styles.radioBtn}
         id="2"
         onClick={sortHandleFast}
-        checked={isChecked.speed}
+        // checked={isChecked.speed}
       />
       <label htmlFor="2" className={styles.label}>
         САМЫЙ БЫСТРЫЙ
@@ -98,7 +95,7 @@ export default function SortRadioButtons() {
         className={styles.radioBtn}
         id="3"
         onClick={sortHandleOptimal}
-        checked={isChecked.optimal}
+        // checked={isChecked.optimal}
       />
       <label htmlFor="3" className={styles.label}>
         ОПТИМАЛЬНЫЙ
