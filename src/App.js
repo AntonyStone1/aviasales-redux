@@ -30,10 +30,18 @@ function App() {
   useEffect(() => {
     store.dispatch(getTicketsData)
   }, [])
-  console.log('state', store.getState())
   return (
     <Switch>
       <Route exact path="/home">
+        <Box className={styles.logoContainer}>
+          <Logo className={styles.logo} />
+        </Box>
+        <div className={styles.appContainer}>
+          <CheckboxPanel />
+          <TicketsList />
+        </div>
+      </Route>
+      <Route path="/home/transfers">
         <Box className={styles.logoContainer}>
           <Logo className={styles.logo} />
         </Box>
