@@ -29,6 +29,7 @@ function App() {
   useEffect(() => {
     store.dispatch(getTicketsData)
   }, [])
+  console.log('lol')
   console.log('state', store.getState())
   return (
     <>
