@@ -2,8 +2,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react'
 import Checkbox from '@mui/material/Checkbox'
+import parseParams from 'helpers/parseParams'
+import createParams from 'helpers/createParams'
 import { makeStyles } from '@mui/styles'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Typography, Container, Box } from '../../node_modules/@material-ui/core/index'
 
 const useStyles = makeStyles({
@@ -18,7 +20,6 @@ const useStyles = makeStyles({
     lineHeight: '12px !important',
     padding: '25px 20px',
     paddingBottom: '10px',
-    // marginBottom: '20px !important',
     textAlign: 'left',
     textTransform: 'uppercase',
   },
@@ -28,16 +29,12 @@ const useStyles = makeStyles({
     paddingRight: '0 !important',
   },
   checkboxPanel: {
-    height: '255px',
+    height: '230px',
     backgroundColor: '#fff',
-    // padding: '20px 20px 10px 20px',
     borderRadius: '5px',
     boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
   },
-  checkbox: {
-    // padding: '0 !important',
-    // padding: '10px 25px 10px 25px',
-  },
+  checkbox: {},
   link: {
     color: '#4A4A4A',
     textDecoration: 'none',
@@ -49,49 +46,24 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 const CheckboxPanel = () => {
   const styles = useStyles()
   const history = useHistory()
-  const [isFiltering, setFiltering] = useState(false)
-  const [isChecked, setChecked] = useState({
-    transferAll: false,
+  const searchStr = useLocation().search
+
+  const [filtersState, setFiltersState] = useState({
     noTransfer: false,
     transferOne: false,
     transferTwo: false,
     transferThree: false,
   })
+  useEffect(() => {
+    setFiltersState(parseParams(searchStr, filtersState))
+  }, [])
 
-  const checkCheckboxState = (state) => {
-    let result = false
-    // eslint-disable-next-line no-restricted-syntax
-    for (const value of Object.values(state)) {
-      if (value) {
-        result = value
-        return result
-      }
-    }
-    return result
-  }
-  useEffect(() => setFiltering(checkCheckboxState(isChecked)), [isChecked])
-  const createUrlFilterStr = (param) => {
-    let result = '/home/transfers?'
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [key, value] of Object.entries(isChecked)) {
-      if (key === 'transferAll') {
-        result += param === key ? `${key}=${!value}` : `${key}=${value}`
-      } else {
-        result += param === key ? `&${key}=${!value}` : `&${key}=${value}`
-      }
-    }
-    return result
-  }
   const clickHandle = (e) => {
-    const url = createUrlFilterStr(e.target.name)
-    setChecked((prev) => ({ ...prev, [e.target.name]: !prev[e.target.name] }))
+    setFiltersState((prev) => ({ ...prev, [e.target.name]: !prev[e.target.name] }))
+    const url = createParams(e.target.name, filtersState, searchStr)
     history.push(url)
   }
-  useEffect(() => {
-    if (!isFiltering) {
-      history.push('/home')
-    }
-  }, [isFiltering])
+  console.log(filtersState)
   return (
     <>
       <Container className={styles.checkboxContainer}>
@@ -100,17 +72,6 @@ const CheckboxPanel = () => {
             Количество пересадок
           </Typography>
           <div className={styles.container}>
-            <label htmlFor="all">
-              <Checkbox
-                {...label}
-                name="transferAll"
-                id="all"
-                className={styles.checkbox}
-                onClick={clickHandle}
-                checked={isChecked.transferAll}
-              />
-              Все
-            </label>
             <label htmlFor="noDirectFlight">
               <Checkbox
                 {...label}
@@ -118,7 +79,7 @@ const CheckboxPanel = () => {
                 id="noDirectFlight"
                 className={styles.checkbox}
                 onClick={clickHandle}
-                checked={isChecked.noTransfer}
+                checked={filtersState.noTransfer}
               />
               Без пересадок
             </label>
@@ -129,7 +90,7 @@ const CheckboxPanel = () => {
                 id="1_dirrect"
                 className={styles.checkbox}
                 onClick={clickHandle}
-                checked={isChecked.transferOne}
+                checked={filtersState.transferOne}
               />
               1 пересадка
             </label>
@@ -140,7 +101,7 @@ const CheckboxPanel = () => {
                 id="2_dirrect"
                 className={styles.checkbox}
                 onClick={clickHandle}
-                checked={isChecked.transferTwo}
+                checked={filtersState.transferTwo}
               />
               2 пересадки
             </label>
@@ -151,7 +112,7 @@ const CheckboxPanel = () => {
                 id="3_dirrect"
                 className={styles.checkbox}
                 onClick={clickHandle}
-                checked={isChecked.transferThree}
+                checked={filtersState.transferThree}
               />
               3 пересадки
             </label>
