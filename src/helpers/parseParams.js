@@ -1,28 +1,18 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
-const parseSearchSrt = (str, initialFilters) => {
-  let parsedObj = {}
-  console.log('initialFilters', initialFilters)
-  console.log('str', str)
-  const res = str
-    .slice(1)
-    .split('&')
-    .map((item) => item.split('='))
-  const filteredRes = res
-    .filter((item) => item[0] !== '')
-    .map((item) => {
-      if (item[1] === 'true') {
-        item[1] = true
-      } else {
-        item[1] = false
+/* eslint-disable no-return-assign */
+const parseSearchSrt = (str, initialFilters, param) => {
+  const result = {}
+  const paramsValue = new URLSearchParams(str)?.get(param)?.split(' ')
+  console.log(paramsValue)
+  if (paramsValue?.length > 0) {
+    console.log(paramsValue)
+    paramsValue.forEach((item) => {
+      if (item !== '' && item.split('')[0] !== '?') {
+        result[item] = true
       }
-      return item
     })
-  console.log(initialFilters)
-  parsedObj = Object.fromEntries(filteredRes)
-  const result = { ...parsedObj, ...initialFilters }
-  if (initialFilters) console.log('result', result)
-  return { ...initialFilters, ...parsedObj }
+  }
+  return { ...initialFilters, ...result }
 }
 
 export default parseSearchSrt

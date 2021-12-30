@@ -47,7 +47,7 @@ const CheckboxPanel = () => {
   const styles = useStyles()
   const history = useHistory()
   const searchStr = useLocation().search
-
+  const homePage = useLocation().pathname
   const [filtersState, setFiltersState] = useState({
     noTransfer: false,
     transferOne: false,
@@ -55,15 +55,23 @@ const CheckboxPanel = () => {
     transferThree: false,
   })
   useEffect(() => {
-    setFiltersState(parseParams(searchStr, filtersState))
-  }, [])
-
+    console.log(parseParams(searchStr, filtersState, 'transfers'))
+    setFiltersState(parseParams(searchStr, filtersState, 'transfers'))
+  }, [searchStr])
   const clickHandle = (e) => {
     setFiltersState((prev) => ({ ...prev, [e.target.name]: !prev[e.target.name] }))
-    const url = createParams(e.target.name, filtersState, searchStr)
-    history.push(url)
   }
-  console.log(filtersState)
+  useEffect(() => {
+    const url = createParams(filtersState, 'transfers', searchStr)
+    if (url !== '') {
+      history.push(url)
+    }
+    console.log(1)
+    if (url === '' && searchStr !== '') {
+      console.log(2)
+      // history.push(url)
+    }
+  }, [filtersState])
   return (
     <>
       <Container className={styles.checkboxContainer}>

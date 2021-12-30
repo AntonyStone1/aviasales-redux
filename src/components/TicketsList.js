@@ -1,10 +1,11 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import Ticket from 'components/Ticket'
 import SortRadioButtons from 'components/SortRadioButtons'
 import filterTickets from 'components/filterTickets'
+import sortTickets from 'components/sortTickets'
 import parseParams from 'helpers/parseParams'
 import { makeStyles } from '@mui/styles'
 import store from 'store/store'
@@ -29,9 +30,13 @@ function TicketsList({ ticketsData: { ticketsData } }) {
   const [paginationStep, SetPaginationStep] = useState(5)
   const styles = useStyles()
   const { isLoaded } = store.getState()
-  // const searchStr = useLocation().search
+  const searchStr = useLocation().search
   // if (searchStr) filteredTicketData = isLoaded && filterTickets(parseParams(searchStr), ticketsData)
 
+  useEffect(() => {
+    // filteredTicketData = filterTickets(parseParams(searchStr, 'transfers'), ticketsData)
+    // filteredTicketData = sortTickets(parseParams(searchStr), ticketsData)
+  }, [searchStr])
   const clickHandler = () => SetPaginationStep((prev) => prev + 5)
   return (
     <Container className={styles.container}>
