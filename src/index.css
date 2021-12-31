@@ -19,3 +19,6 @@ input[type='radio']:checked + label {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+a:hover {
+  background-color: #f1fcff;
+}

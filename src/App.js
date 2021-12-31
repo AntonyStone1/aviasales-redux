@@ -6,6 +6,7 @@ import Box from '@mui/material/Box'
 import { ReactComponent as Logo } from 'img/Logo.svg'
 import CheckboxPanel from 'components/CheckboxPanel'
 import TicketsList from 'components/TicketsList'
+import { Switch, Route, Redirect } from 'react-router'
 import getTicketsData from './store/action/getTicketsData'
 
 const useStyles = makeStyles({
@@ -29,18 +30,24 @@ function App() {
   useEffect(() => {
     store.dispatch(getTicketsData)
   }, [])
+<<<<<<< HEAD
   console.log('state', store.getState())
   console.log(1)
+=======
+>>>>>>> url-filter
   return (
-    <>
-      <Box className={styles.logoContainer}>
-        <Logo className={styles.logo} />
-      </Box>
-      <div className={styles.appContainer}>
-        <CheckboxPanel />
-        <TicketsList />
-      </div>
-    </>
+    <Switch>
+      <Route exact path="/home">
+        <Box className={styles.logoContainer}>
+          <Logo className={styles.logo} />
+        </Box>
+        <div className={styles.appContainer}>
+          <CheckboxPanel />
+          <TicketsList />
+        </div>
+      </Route>
+      <Redirect exact from="/*" to="/home" />
+    </Switch>
   )
 }
 

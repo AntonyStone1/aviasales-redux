@@ -62,12 +62,12 @@ const useStyles = makeStyles({
 
 const Ticket = ({ ticketData }) => {
   const styled = useStyles()
-  const dataTicket1 = ticketData.segments[0]
-  const dataTicket2 = ticketData.segments[1]
-  const dateTicket1 = new Date(ticketData.segments[0].date)
-  const durationTicket1 = ticketData.segments[0].duration
-  const dateTicket2 = new Date(ticketData.segments[1].date)
-  const durationTicket2 = ticketData.segments[1].duration
+  const dataTicket1 = ticketData?.segments[0]
+  const dataTicket2 = ticketData?.segments[1]
+  const dateTicket1 = new Date(ticketData?.segments[0].date)
+  const durationTicket1 = ticketData?.segments[0].duration
+  const dateTicket2 = new Date(ticketData?.segments[1].date)
+  const durationTicket2 = ticketData?.segments[1].duration
 
   const generatePriceIndent = (price) =>
     price

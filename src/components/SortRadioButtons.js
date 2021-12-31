@@ -1,10 +1,12 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react'
-import store from 'store/store'
+import parseParams from 'helpers/parseParams'
+import createParams from 'helpers/createParams'
 import { makeStyles } from '@mui/styles'
-import sortDataPrice from 'store/action/sortData/sortDataPrice'
-import sortDataFast from 'store/action/sortData/sortDataFast'
-import sortDataOptimal from 'store/action/sortData/sortDataOptimal'
+import { useHistory, useLocation } from 'react-router'
 import { Container } from '../../node_modules/@material-ui/core/index'
 
 const useStyles = makeStyles({
@@ -16,7 +18,7 @@ const useStyles = makeStyles({
     borderRadius: '5px !important',
   },
   radioBtn: {
-    // display: 'none',
+    display: 'none',
   },
   label: {
     display: 'flex',
@@ -43,37 +45,38 @@ const useStyles = makeStyles({
 
 export default function SortRadioButtons() {
   const styles = useStyles()
-  const [isChecked, setChecked] = useState({
-    price: true,
+  const history = useHistory()
+  const searchStr = useLocation().search
+  const initialState = {
+    price: false,
     speed: false,
     optimal: false,
-  })
+  }
+  const [isChecked, setChecked] = useState(initialState)
+
   useEffect(() => {
-    store.dispatch(sortDataPrice)
-    console.log(1)
-  }, [])
-  const sortHandlePrice = () => {
-    store.dispatch(sortDataPrice)
-    setChecked((prev) => !prev.price)
+    setChecked(parseParams(searchStr, isChecked, 'sort'))
+  }, [searchStr])
+  const sortHandle = (e) => {
+    const res = { ...initialState, [e.target.value]: !initialState[e.target.checked] }
+    setChecked((prev) => ({ ...prev, ...res }))
   }
-  const sortHandleFast = () => {
-    store.dispatch(sortDataFast)
-    setChecked((prev) => !prev.speed)
-  }
-  const sortHandleOptimal = () => {
-    store.dispatch(sortDataOptimal)
-    setChecked((prev) => !prev.optimal)
-  }
+  useEffect(() => {
+    const url = createParams(isChecked, 'sort', searchStr)
+    if (url !== '') {
+      history.push(url)
+    }
+  }, [isChecked])
 
   return (
     <Container className={styles.container}>
       <input
         type="radio"
-        value="chip"
-        name="sort-btn"
+        name="sort"
+        value="price"
         className={styles.radioBtn}
         id="1"
-        onChange={sortHandlePrice}
+        onChange={sortHandle}
         checked={isChecked.price}
       />
       <label htmlFor="1" className={styles.label}>
@@ -81,11 +84,11 @@ export default function SortRadioButtons() {
       </label>
       <input
         type="radio"
-        value="fast"
-        name="sort-btn"
+        name="sort"
+        value="speed"
         className={styles.radioBtn}
         id="2"
-        onClick={sortHandleFast}
+        onChange={sortHandle}
         checked={isChecked.speed}
       />
       <label htmlFor="2" className={styles.label}>
@@ -93,11 +96,11 @@ export default function SortRadioButtons() {
       </label>
       <input
         type="radio"
+        name="sort"
         value="optimal"
-        name="sort-btn"
         className={styles.radioBtn}
         id="3"
-        onClick={sortHandleOptimal}
+        onChange={sortHandle}
         checked={isChecked.optimal}
       />
       <label htmlFor="3" className={styles.label}>

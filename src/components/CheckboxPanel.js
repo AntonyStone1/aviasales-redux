@@ -1,14 +1,11 @@
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable arrow-body-style */
-import React from 'react'
-import filterDataOne from 'store/action/filterData/filterDataOne'
-import filterDataTwo from 'store/action/filterData/filterDataTwo'
-import filterDataThree from 'store/action/filterData/filterDataThree'
-import filterDataAll from 'store/action/filterData/filterDataAll'
-import filterDataNoTransfer from 'store/action/filterData/filterDataNoTransfer'
-import store from 'store/store'
+import React, { useEffect, useState } from 'react'
 import Checkbox from '@mui/material/Checkbox'
+import parseParams from 'helpers/parseParams'
+import createParams from 'helpers/createParams'
 import { makeStyles } from '@mui/styles'
+import { useHistory, useLocation } from 'react-router-dom'
 import { Typography, Container, Box } from '../../node_modules/@material-ui/core/index'
 
 const useStyles = makeStyles({
@@ -21,7 +18,8 @@ const useStyles = makeStyles({
     fontWeight: '600 !important',
     fontSize: '12px !important',
     lineHeight: '12px !important',
-    marginBottom: '20px !important',
+    padding: '25px 20px',
+    paddingBottom: '10px',
     textAlign: 'left',
     textTransform: 'uppercase',
   },
@@ -31,16 +29,15 @@ const useStyles = makeStyles({
     paddingRight: '0 !important',
   },
   checkboxPanel: {
-    height: '222px',
+    height: '230px',
     backgroundColor: '#fff',
-    padding: '20px 20px 10px 20px',
     borderRadius: '5px',
     boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.1)',
   },
-  checkbox: {
-    padding: '0 !important',
-    paddingBottom: '10px !important',
-    paddingRight: '14px !important',
+  checkbox: {},
+  link: {
+    color: '#4A4A4A',
+    textDecoration: 'none',
   },
 })
 
@@ -48,23 +45,30 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
 
 const CheckboxPanel = () => {
   const styles = useStyles()
-
-  const clickHandlerAll = () => {
-    store.dispatch(filterDataAll)
+  const history = useHistory()
+  const searchStr = useLocation().search
+  const homePage = useLocation().pathname
+  const [filtersState, setFiltersState] = useState({
+    noTransfer: false,
+    transferOne: false,
+    transferTwo: false,
+    transferThree: false,
+  })
+  useEffect(() => {
+    setFiltersState(parseParams(searchStr, filtersState, 'transfers'))
+  }, [searchStr])
+  const clickHandle = (e) => {
+    setFiltersState((prev) => ({ ...prev, [e.target.name]: !prev[e.target.name] }))
   }
-  const clickHandlerNoTransfer = () => {
-    store.dispatch(filterDataNoTransfer)
-  }
-  const clickHandlerOne = () => {
-    store.dispatch(filterDataOne)
-  }
-  const clickHandlerTwo = () => {
-    store.dispatch(filterDataTwo)
-  }
-  const clickHandlerThree = () => {
-    store.dispatch(filterDataThree)
-  }
-
+  useEffect(() => {
+    const url = createParams(filtersState, 'transfers', searchStr)
+    if (url !== '') {
+      history.push(url)
+    }
+    if (url === '' && searchStr !== '') {
+      history.push(homePage)
+    }
+  }, [filtersState])
   return (
     <>
       <Container className={styles.checkboxContainer}>
@@ -73,50 +77,47 @@ const CheckboxPanel = () => {
             Количество пересадок
           </Typography>
           <div className={styles.container}>
-            <label htmlFor="all">
+            <label htmlFor="noDirectFlight">
               <Checkbox
                 {...label}
-                name="ALL"
-                id="all"
+                name="noTransfer"
+                id="noDirectFlight"
                 className={styles.checkbox}
-                onChange={clickHandlerAll}
-              />
-              Все
-            </label>
-            <label htmlFor="directFlight">
-              <Checkbox
-                {...label}
-                id="directFlight"
-                className={styles.checkbox}
-                onChange={clickHandlerNoTransfer}
+                onClick={clickHandle}
+                checked={filtersState.noTransfer}
               />
               Без пересадок
             </label>
             <label htmlFor="1_dirrect">
               <Checkbox
                 {...label}
+                name="transferOne"
                 id="1_dirrect"
-                onChange={clickHandlerOne}
                 className={styles.checkbox}
-                che
+                onClick={clickHandle}
+                checked={filtersState.transferOne}
               />
               1 пересадка
             </label>
             <label htmlFor="2_dirrect">
               <Checkbox
                 {...label}
+                name="transferTwo"
                 id="2_dirrect"
                 className={styles.checkbox}
-                onChange={clickHandlerTwo}
+                onClick={clickHandle}
+                checked={filtersState.transferTwo}
               />
               2 пересадки
             </label>
             <label htmlFor="3_dirrect">
               <Checkbox
                 {...label}
+                name="transferThree"
                 id="3_dirrect"
                 className={styles.checkbox}
-                onChange={clickHandlerThree}
+                onClick={clickHandle}
+                checked={filtersState.transferThree}
               />
               3 пересадки
             </label>
