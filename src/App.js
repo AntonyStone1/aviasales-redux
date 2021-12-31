@@ -30,11 +30,6 @@ function App() {
   useEffect(() => {
     store.dispatch(getTicketsData)
   }, [])
-<<<<<<< HEAD
-  console.log('state', store.getState())
-  console.log(1)
-=======
->>>>>>> url-filter
   return (
     <Switch>
       <Route exact path="/home">
