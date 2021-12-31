@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import { ReactComponent as Logo } from 'img/Logo.svg'
 import CheckboxPanel from 'components/CheckboxPanel'
 import TicketsList from 'components/TicketsList'
-import { Switch, Route } from 'react-router'
+import { Switch, Route, Redirect } from 'react-router'
 import getTicketsData from './store/action/getTicketsData'
 
 const useStyles = makeStyles({
@@ -41,6 +41,7 @@ function App() {
           <TicketsList />
         </div>
       </Route>
+      <Redirect exact from="/*" to="/home" />
     </Switch>
   )
 }

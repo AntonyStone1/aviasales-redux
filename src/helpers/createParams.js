@@ -8,6 +8,24 @@ const createParams = (initialParams, param, str) => {
   let res = ''
   const paramsStr = new URLSearchParams(str)
   const arr = Object.entries(initialParams)
+  if (paramsStr.has(param) && str !== '') {
+    if (arr.find((item) => item[1] === true)) {
+      res = arr.reduce((acum, item) => {
+        if (item[1] === true) {
+          acum += `${item[0]} `
+        }
+        return acum
+      }, ``)
+    }
+
+    paramsStr.set(param, res.trim())
+    if (res === '') {
+      paramsStr.delete(param)
+    }
+    result = `?${paramsStr.toString()}`
+
+    return result
+  }
   if (arr.find((item) => item[1] === true)) {
     res = arr.reduce((acum, item) => {
       if (item[1] === true) {
@@ -16,11 +34,11 @@ const createParams = (initialParams, param, str) => {
       return acum
     }, ``)
   }
-
   if (res !== '') {
-    paramsStr.set(param, res.slice(0, -1))
-    return (result += `?${paramsStr.toString()}`)
+    paramsStr.set(param, res.trim())
+    result = `?${paramsStr.toString()}`
   }
+
   return result
 }
 

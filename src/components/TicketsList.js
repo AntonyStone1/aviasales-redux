@@ -26,23 +26,44 @@ const useStyles = makeStyles({
 })
 
 function TicketsList({ ticketsData: { ticketsData } }) {
-  const filteredTicketData = ticketsData
+  const { isLoaded } = store.getState()
+  const [filteredTicketsData, setTicketsData] = useState(isLoaded ? ticketsData : [])
   const [paginationStep, SetPaginationStep] = useState(5)
   const styles = useStyles()
-  const { isLoaded } = store.getState()
   const searchStr = useLocation().search
-  // if (searchStr) filteredTicketData = isLoaded && filterTickets(parseParams(searchStr), ticketsData)
-
+  const searchParams = new URLSearchParams(searchStr)
   useEffect(() => {
-    // filteredTicketData = filterTickets(parseParams(searchStr, 'transfers'), ticketsData)
-    // filteredTicketData = sortTickets(parseParams(searchStr), ticketsData)
+    setTicketsData(ticketsData)
+    if (ticketsData.length > 0) {
+      if (searchParams.has('sort') || searchParams.has('transfers')) {
+        setTicketsData(
+          sortTickets(
+            parseParams(searchStr, {}, 'sort'),
+            filterTickets(parseParams(searchStr, {}, 'transfers'), ticketsData),
+          ),
+        )
+      }
+    }
+  }, [isLoaded])
+  useEffect(() => {
+    if (filteredTicketsData.length > 0) {
+      setTicketsData(
+        sortTickets(
+          parseParams(searchStr, {}, 'sort'),
+          filterTickets(parseParams(searchStr, {}, 'transfers'), ticketsData),
+        ),
+      )
+    }
   }, [searchStr])
+
   const clickHandler = () => SetPaginationStep((prev) => prev + 5)
+  console.log('filteredData', filteredTicketsData)
   return (
     <Container className={styles.container}>
       <SortRadioButtons />
       {isLoaded &&
-        filteredTicketData?.map((ticket, index) => {
+        filteredTicketsData?.length > 0 &&
+        filteredTicketsData?.map((ticket, index) => {
           if (index < paginationStep) {
             return <Ticket key={Math.random(ticket.price)} ticketData={ticket} />
           }

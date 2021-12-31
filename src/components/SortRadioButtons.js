@@ -56,7 +56,6 @@ export default function SortRadioButtons() {
   const [isChecked, setChecked] = useState(initialState)
 
   useEffect(() => {
-    console.log(parseParams(searchStr, isChecked, 'sort'))
     setChecked(parseParams(searchStr, isChecked, 'sort'))
   }, [searchStr])
   const sortHandle = (e) => {
@@ -69,13 +68,7 @@ export default function SortRadioButtons() {
       history.push(url)
     }
   }, [isChecked])
-  useEffect(() => {
-    const url = createParams(isChecked, 'sort', searchStr)
-    console.log(url)
-    if (url !== '') {
-      history.push(url)
-    }
-  }, [isChecked])
+
   return (
     <Container className={styles.container}>
       <input

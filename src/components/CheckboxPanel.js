@@ -55,7 +55,6 @@ const CheckboxPanel = () => {
     transferThree: false,
   })
   useEffect(() => {
-    console.log(parseParams(searchStr, filtersState, 'transfers'))
     setFiltersState(parseParams(searchStr, filtersState, 'transfers'))
   }, [searchStr])
   const clickHandle = (e) => {
@@ -66,10 +65,8 @@ const CheckboxPanel = () => {
     if (url !== '') {
       history.push(url)
     }
-    console.log(1)
     if (url === '' && searchStr !== '') {
-      console.log(2)
-      // history.push(url)
+      history.push(homePage)
     }
   }, [filtersState])
   return (
