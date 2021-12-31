@@ -57,7 +57,6 @@ function TicketsList({ ticketsData: { ticketsData } }) {
   }, [searchStr])
 
   const clickHandler = () => SetPaginationStep((prev) => prev + 5)
-  console.log('filteredData', filteredTicketsData)
   return (
     <Container className={styles.container}>
       <SortRadioButtons />

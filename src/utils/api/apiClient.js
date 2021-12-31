@@ -27,7 +27,7 @@ const callApi = async (url, { headers = {}, params = {}, data, ...restOptions })
     config.data = {}
   }
   const request = async (conf) => {
-    const responseData = await axios.request(config).catch((error) => (hasError = true))
+    const responseData = await axios.request(config).catch(() => (hasError = true))
     if (responseData.status === 200) {
       hasError = false
     }

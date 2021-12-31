@@ -7,7 +7,6 @@ import parseParams from 'helpers/parseParams'
 import createParams from 'helpers/createParams'
 import { makeStyles } from '@mui/styles'
 import { useHistory, useLocation } from 'react-router'
-import sortTickets from './sortTickets'
 import { Container } from '../../node_modules/@material-ui/core/index'
 
 const useStyles = makeStyles({

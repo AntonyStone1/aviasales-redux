@@ -3,9 +3,7 @@
 const parseSearchSrt = (str, initialFilters, param) => {
   const result = {}
   const paramsValue = new URLSearchParams(str)?.get(param)?.split(' ')
-  console.log(paramsValue?.toString())
   if (paramsValue?.length > 0) {
-    console.log(paramsValue)
     paramsValue.forEach((item) => {
       if (item !== '' && item.split('')[0] !== '?') {
         result[item] = true
