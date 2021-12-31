@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-assign */
 import axios from 'axios'
 
 let baseEndpoint = ''
@@ -5,7 +7,6 @@ let baseEndpoint = ''
 const getBaseHeaders = () => ({
   Accept: 'application/json',
   'Content-Type': 'application/json',
-  // 'Access-Control-Allow-Origin': '*',
 })
 
 export const setBaseEndpoint = (ep) => {
@@ -21,13 +22,22 @@ const callApi = async (url, { headers = {}, params = {}, data, ...restOptions })
 
     ...restOptions,
   }
-
+  let hasError = false
   if (restOptions.method === 'POST' && !config.data) {
     config.data = {}
   }
-
-  const request = await axios.request(config)
-  return request
+  const request = async (conf) => {
+    const responseData = await axios.request(config).catch((error) => (hasError = true))
+    if (responseData.status === 200) {
+      hasError = false
+    }
+    if (!hasError) {
+      return responseData
+    }
+    return request(conf)
+  }
+  const responseData = request()
+  return responseData
 }
 
 export default {

@@ -6,6 +6,7 @@ async function getTicketData(dispatch) {
   const response = await getKey()
   const getData = () => apiClient.get(PATHS.getTicketsData + response.data.searchId)
   const data = await getData()
+  console.log('getData', data)
   dispatch({ type: 'TICKET_DATA', payload: data.data.tickets, isLoaded: true })
 }
 export default getTicketData
