@@ -6,7 +6,7 @@ import parseParams from 'helpers/parseParams'
 import createParams from 'helpers/createParams'
 import { makeStyles } from '@mui/styles'
 import { useHistory, useLocation } from 'react-router-dom'
-import { Typography, Container, Box } from '../../node_modules/@material-ui/core/index'
+import { Typography, Container, Box } from '@material-ui/core'
 
 const useStyles = makeStyles({
   container: {

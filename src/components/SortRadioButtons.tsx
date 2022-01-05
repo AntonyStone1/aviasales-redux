@@ -3,11 +3,11 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react'
-import parseParams from 'helpers/parseParams'
+import parseParams from 'src/helpers/parseParams'
 import createParams from 'helpers/createParams'
 import { makeStyles } from '@mui/styles'
 import { useHistory, useLocation } from 'react-router'
-import { Container } from '../../node_modules/@material-ui/core/index'
+import { Container } from '@material-ui/core'
 
 const useStyles = makeStyles({
   container: {

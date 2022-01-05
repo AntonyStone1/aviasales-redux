@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
-import store from 'store/store'
-import { makeStyles } from '@mui/styles'
-import Box from '@mui/material/Box'
-import { ReactComponent as Logo } from 'img/Logo.svg'
-import CheckboxPanel from 'components/CheckboxPanel'
-import TicketsList from 'components/TicketsList'
-import { Switch, Route, Redirect } from 'react-router'
-import getTicketsData from './store/action/getTicketsData'
+import React, { useEffect } from 'react';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import { ReactComponent as Logo } from 'src/img/Logo.svg';
+import CheckboxPanel from 'src/components/CheckboxPanel';
+import TicketsList from 'src/components/TicketsList';
+import { Switch, Route, Redirect } from 'react-router';
+import store from 'src/store/store';
+import getTicketsData from 'src/store/action/getTicketsData';
 
 const useStyles = makeStyles({
   appContainer: {
@@ -23,18 +23,13 @@ const useStyles = makeStyles({
     margin: '0 auto',
     marginBottom: '1.8%',
   },
-})
+});
 
 function App() {
-  const styles = useStyles()
+  const styles = useStyles();
   useEffect(() => {
-    store.dispatch(getTicketsData)
-  }, [])
-<<<<<<< HEAD
-  console.log('state', store.getState())
-  console.log(1)
-=======
->>>>>>> url-filter
+    store.dispatch(getTicketsData);
+  }, []);
   return (
     <Switch>
       <Route exact path="/home">
@@ -48,7 +43,7 @@ function App() {
       </Route>
       <Redirect exact from="/*" to="/home" />
     </Switch>
-  )
+  );
 }
 
-export default App
+export default App;

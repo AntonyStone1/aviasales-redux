@@ -1,10 +1,19 @@
+
 {
+  "semi": true,
+  "tabWidth": 2,
   "useTabs": false,
   "printWidth": 100,
   "singleQuote": true,
+  "bracketSameLine": false,
+  "endOfLine": "lf",
   "trailingComma": "all",
-  "bracketSpacing": true,
-  "jsxBracketSameLine": false,
-  "semi": false,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "importOrderSeparation": true,
+  "importOrder": [
+    "^src/(api|constants|contexts|query|hooks|utils)/?(.*)$",
+    "^src/([A-Z]|containers|components|pages|modals)/?(.*)$",
+    "^src/(assets|styled|i18n)/?(.*)$",
+    "^[./]"
+  ]
 }
