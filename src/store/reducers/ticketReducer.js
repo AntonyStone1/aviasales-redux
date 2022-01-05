@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
-import initialState from 'store/initialState';
-import ACTIONS from 'store/actionTypes/actionTypes';
+import initialState from 'src/store/initialState'
+import ACTIONS from 'src/store/actionTypes/actionTypes'
 
 function ticketReducer(state = initialState, action) {
   // eslint-disable-next-line global-require
@@ -12,11 +12,11 @@ function ticketReducer(state = initialState, action) {
         ticketsData: action.payload,
         staticTicketData: action.payload,
         isLoaded: action.isLoaded,
-      };
+      }
     }
 
     default:
-      return state;
+      return state
   }
 }
-export default ticketReducer;
+export default ticketReducer

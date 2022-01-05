@@ -1,5 +1,5 @@
-import initialState from 'src/store/initialState';
-import ACTIONS from 'src/store/actionTypes/actionTypes';
+import initialState from 'src/store/initialState'
+import ACTIONS from 'src/store/actionTypes/actionTypes'
 
 function ticketReducer(state = initialState, action: any) {
   switch (action.type) {
@@ -9,11 +9,11 @@ function ticketReducer(state = initialState, action: any) {
         ticketsData: action.payload,
         staticTicketData: action.payload,
         isLoaded: action.isLoaded,
-      };
+      }
     }
 
     default:
-      return state;
+      return state
   }
 }
-export default ticketReducer;
+export default ticketReducer

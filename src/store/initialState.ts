@@ -4,6 +4,6 @@ const initialState = {
   staticTicketData: {},
   isLoaded: false,
   isChecked: false,
-};
+}
 
-export default initialState;
+export default initialState

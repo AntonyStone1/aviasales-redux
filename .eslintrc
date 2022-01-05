@@ -47,6 +47,7 @@
     "no-console": 0,
     "no-shadow": "off",
     "no-throw-literal": "off",
+    "semi": "off",
     "prettier/prettier": [
       "error",
       {
