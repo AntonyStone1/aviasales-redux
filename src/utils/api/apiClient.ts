@@ -1,23 +1,19 @@
-/* eslint-disable no-undef */
-/* eslint-disable prettier/prettier */
-/* eslint-disable consistent-return */
-/* eslint-disable no-return-assign */
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios';
 
 type RestOptions = {
   method: string;
-}
+};
 type ConfigOptions = {
   url: string;
   headers?: any;
   params?: Object;
   data?: any;
   restOptions?: RestOptions;
-}
+};
 type BaseHeaders = {
   Accept: string;
   'Content-Type': string;
-}
+};
 
 type CallApi = {
   headers?: Record<string, string>;
@@ -26,21 +22,23 @@ type CallApi = {
   options?: {
     method: string;
   };
-}
+};
 
-let baseEndpoint: string = ''
+let baseEndpoint: string = '';
 
 const getBaseHeaders = (): BaseHeaders => ({
   Accept: 'application/json',
   'Content-Type': 'application/json',
-})
+});
 
 export const setBaseEndpoint = (ep: string) => {
-  baseEndpoint = ep
-}
+  baseEndpoint = ep;
+};
 
-const callApi =
-  async (url: string, { headers = {}, params = {}, data, options }: CallApi ): Promise<any> => {
+const callApi = async (
+  url: string,
+  { headers = {}, params = {}, data, options }: CallApi,
+): Promise<any> => {
   const config = {
     url,
     headers: { ...getBaseHeaders(), ...headers },
@@ -48,32 +46,34 @@ const callApi =
     data,
 
     ...options,
-  }
-    let hasError = false
+  };
+  let hasError = false;
   if (options == undefined) {
-    console.log('restOptions - undefined');    
+    console.log('restOptions - undefined');
   } else if (options.method === 'POST' && !config.data) {
-    config.data = {}
+    config.data = {};
   }
-  
-  const request = async (conf: ConfigOptions): Promise<any>  => {
-    const responseData: boolean | AxiosResponse<any, any> = await axios.request(conf).catch(() => hasError = true)
+
+  const request = async (conf: ConfigOptions): Promise<any> => {
+    const responseData: boolean | AxiosResponse<any, any> = await axios
+      .request(conf)
+      .catch(() => (hasError = true));
 
     if (typeof responseData === 'boolean') {
-      console.log(hasError);      
-      return request(conf) 
+      console.log(hasError);
+      return request(conf);
     }
     if (responseData.status === 200) {
-    return responseData
+      return responseData;
     }
-  }
-  const responseData = request(config)
-  return responseData
-}
+  };
+  const responseData = request(config);
+  return responseData;
+};
 
 export default {
   get: (url: string, options?: any) => callApi(url, { ...options, method: 'GET' }),
   post: (url: string, options?: any) => callApi(url, { ...options, method: 'POST' }),
   put: (url: string, options?: any) => callApi(url, { ...options, method: 'PUT' }),
   delete: (url: string, options?: any) => callApi(url, { ...options, method: 'DELETE' }),
-}
+};

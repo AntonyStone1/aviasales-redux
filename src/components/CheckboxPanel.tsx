@@ -1,12 +1,10 @@
-/* eslint-disable consistent-return */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react'
-import Checkbox from '@mui/material/Checkbox'
-import parseParams from 'helpers/parseParams'
-import createParams from 'helpers/createParams'
-import { makeStyles } from '@mui/styles'
-import { useHistory, useLocation } from 'react-router-dom'
-import { Typography, Container, Box } from '@material-ui/core'
+import React, { useEffect, useState } from 'react';
+import Checkbox from '@mui/material/Checkbox';
+import parseParams from 'src/helpers/parseParams';
+import createParams from 'src/helpers/createParams';
+import { makeStyles } from '@mui/styles';
+import { useHistory, useLocation } from 'react-router-dom';
+import { Typography, Container, Box } from '@material-ui/core';
 
 const useStyles = makeStyles({
   container: {
@@ -39,36 +37,36 @@ const useStyles = makeStyles({
     color: '#4A4A4A',
     textDecoration: 'none',
   },
-})
+});
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const CheckboxPanel = () => {
-  const styles = useStyles()
-  const history = useHistory()
-  const searchStr = useLocation().search
-  const homePage = useLocation().pathname
+  const styles = useStyles();
+  const history = useHistory();
+  const searchStr = useLocation().search;
+  const homePage = useLocation().pathname;
   const [filtersState, setFiltersState] = useState({
     noTransfer: false,
     transferOne: false,
     transferTwo: false,
     transferThree: false,
-  })
+  });
   useEffect(() => {
-    setFiltersState(parseParams(searchStr, filtersState, 'transfers'))
-  }, [searchStr])
-  const clickHandle = (e) => {
-    setFiltersState((prev) => ({ ...prev, [e.target.name]: !prev[e.target.name] }))
-  }
+    setFiltersState(parseParams(searchStr, filtersState, 'transfers'));
+  }, [searchStr]);
+  const clickHandle = (e: any) => {
+    setFiltersState((prev) => ({ ...prev, [e.target.name]: !prev[e.target.name] }));
+  };
   useEffect(() => {
-    const url = createParams(filtersState, 'transfers', searchStr)
+    const url = createParams(filtersState, 'transfers', searchStr);
     if (url !== '') {
-      history.push(url)
+      history.push(url);
     }
     if (url === '' && searchStr !== '') {
-      history.push(homePage)
+      history.push(homePage);
     }
-  }, [filtersState])
+  }, [filtersState]);
   return (
     <>
       <Container className={styles.checkboxContainer}>
@@ -125,7 +123,7 @@ const CheckboxPanel = () => {
         </Box>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default CheckboxPanel
+export default CheckboxPanel;

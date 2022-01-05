@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
-import React from 'react'
-import { makeStyles } from '@mui/styles'
-import Box from '@mui/material/Box'
-import { Container, Typography } from '@material-ui/core'
-import { ReactComponent as YourSvg } from './img/S7_Logo.svg'
+import React from 'react';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import { Container, Typography } from '@material-ui/core';
+import { ReactComponent as YourSvg } from 'src/img/S7_Logo.svg';
 
 const useStyles = makeStyles({
   container: {
@@ -58,59 +57,60 @@ const useStyles = makeStyles({
   textContainer: {
     width: '31%',
   },
-})
+});
 
-const Ticket = ({ ticketData }) => {
-  const styled = useStyles()
-  const dataTicket1 = ticketData?.segments[0]
-  const dataTicket2 = ticketData?.segments[1]
-  const dateTicket1 = new Date(ticketData?.segments[0].date)
-  const durationTicket1 = ticketData?.segments[0].duration
-  const dateTicket2 = new Date(ticketData?.segments[1].date)
-  const durationTicket2 = ticketData?.segments[1].duration
+const Ticket = ({ ticketData }: any) => {
+  const styled = useStyles();
+  const dataTicket1 = ticketData?.segments[0];
+  const dataTicket2 = ticketData?.segments[1];
+  const dateTicket1 = new Date(ticketData?.segments[0].date);
+  const durationTicket1 = ticketData?.segments[0].duration;
+  const dateTicket2 = new Date(ticketData?.segments[1].date);
+  const durationTicket2 = ticketData?.segments[1].duration;
 
-  const generatePriceIndent = (price) =>
+  const generatePriceIndent = (price: any) =>
     price
       .toString()
       .split('')
-      .map((item, index) => {
-        if (index === 2) return ` ${item}`
-        return item
+      .map((item: any, index: any) => {
+        if (index === 2) return ` ${item}`;
+        return item;
       })
-      .join('')
-  const departureTime = (date) =>
+      .join('');
+  const departureTime = (date: any) =>
     `${date.getHours().toString().padStart(2, '0')}:${date
       .getMinutes()
       .toString()
-      .padStart(2, '0')}`
-  const airrivalTime = (date, minutes) =>
+      .padStart(2, '0')}`;
+  const airrivalTime = (date: any, minutes: any) =>
     `${new Date(date.getTime() + minutes * 60000)
       .getHours()
       .toString()
       .padStart(2, '0')}:${new Date(date.getTime() + minutes * 60000)
       .getMinutes()
       .toString()
-      .padStart(2, '0')}`
+      .padStart(2, '0')}`;
 
-  const createTravelTimeStr = (minutes) => {
-    let h = Math.floor(minutes / 60)
-    let m = minutes % 60
-    h = h < 10 ? `0${h}` : h
-    m = m < 10 ? `${m}` : m
-    return `${h}ч ${m}м`
-  }
-  // eslint-disable-next-line consistent-return
-  const createTransferEndWord = (tiket) => {
+  const createTravelTimeStr = (minutes: any) => {
+    let h: string | number = Math.floor(minutes / 60);
+    let m: string | number = minutes % 60;
+    h = h < 10 ? `0${h}` : h;
+    m = m < 10 ? `${m}` : m;
+    return `${h}ч ${m}м`;
+  };
+
+  const createTransferEndWord = (tiket: any) => {
     if (tiket.stops.length === 0) {
-      return `БЕЗ ПЕРЕСАДОК`
+      return `БЕЗ ПЕРЕСАДОК`;
     }
     if (tiket.stops.length === 1) {
-      return `${tiket.stops.length} ПЕРЕСАДКА`
+      return `${tiket.stops.length} ПЕРЕСАДКА`;
     }
     if (tiket.stops.length > 1) {
-      return `${tiket.stops.length} ПЕРЕСАДКИ`
+      return `${tiket.stops.length} ПЕРЕСАДКИ`;
     }
-  }
+    return null;
+  };
 
   return (
     <Container className={styled.container}>
@@ -143,7 +143,7 @@ const Ticket = ({ ticketData }) => {
             </Typography>
             <Typography className={styled.blackText}>
               {ticketData.segments[0].stops
-                .map((item) => `${item}`)
+                .map((item: any) => `${item}`)
                 .join(', ')
                 .split('')}
             </Typography>
@@ -171,7 +171,7 @@ const Ticket = ({ ticketData }) => {
             </Typography>
             <Typography className={styled.blackText}>
               {ticketData.segments[1].stops
-                .map((item) => `${item}`)
+                .map((item: any) => `${item}`)
                 .join(', ')
                 .split('')}
             </Typography>
@@ -179,7 +179,7 @@ const Ticket = ({ ticketData }) => {
         </Box>
       </Box>
     </Container>
-  )
-}
+  );
+};
 
-export default Ticket
+export default Ticket;
