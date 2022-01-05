@@ -1,6 +1,6 @@
-import { getKey } from 'utils/api/requests'
-import apiClient from '../../utils/api/apiClient'
-import PATHS from '../../utils/api/Path'
+import apiClient from 'utils/api/apiClient.ts'
+import { getKey } from 'utils/api/requests.tsx'
+import PATHS from 'utils/api/Path.tsx'
 
 async function getTicketData(dispatch) {
   const response = await getKey()

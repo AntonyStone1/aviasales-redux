@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import Ticket from 'components/Ticket'
 import SortRadioButtons from 'components/SortRadioButtons'
 import filterTickets from 'components/filterTickets'
 import sortTickets from 'components/sortTickets'
@@ -11,7 +10,8 @@ import { makeStyles } from '@mui/styles'
 import store from 'store/store'
 import TicketsListPgnBtn from 'components/Pagination/TicketsListPagBtn'
 import { useLocation } from 'react-router-dom'
-import { Container } from '../../node_modules/@material-ui/core/index'
+import Ticket from './Ticket.tsx'
+import { Container } from '@material-ui/core'
 
 const useStyles = makeStyles({
   container: {

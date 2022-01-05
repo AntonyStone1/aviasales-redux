@@ -2,8 +2,8 @@
 import React from 'react'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
-import { Container, Typography } from '../../node_modules/@material-ui/core/index'
-import { ReactComponent as YourSvg } from '../img/S7_Logo.svg'
+import { Container, Typography } from '@material-ui/core'
+import { ReactComponent as YourSvg } from './img/S7_Logo.svg'
 
 const useStyles = makeStyles({
   container: {
