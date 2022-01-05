@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
@@ -8,6 +9,14 @@ import createParams from 'helpers/createParams'
 import { makeStyles } from '@mui/styles'
 import { useHistory, useLocation } from 'react-router'
 import { Container } from '@material-ui/core'
+=======
+import React, { useEffect, useState } from 'react';
+import parseParams from 'src/helpers/parseParams';
+import createParams from 'src/helpers/createParams';
+import { makeStyles } from '@mui/styles';
+import { useHistory, useLocation } from 'react-router';
+import { Container } from '@material-ui/core';
+>>>>>>> c86aedb7feaa14c16f23553e9b907b71d55efa14
 
 const useStyles = makeStyles({
   container: {
@@ -41,32 +50,32 @@ const useStyles = makeStyles({
     borderBottomRightRadius: '5px',
     borderTopRightRadius: '5px',
   },
-})
+});
 
 export default function SortRadioButtons() {
-  const styles = useStyles()
-  const history = useHistory()
-  const searchStr = useLocation().search
+  const styles = useStyles();
+  const history = useHistory();
+  const searchStr = useLocation().search;
   const initialState = {
     price: false,
     speed: false,
     optimal: false,
-  }
-  const [isChecked, setChecked] = useState(initialState)
+  };
+  const [isChecked, setChecked] = useState(initialState);
 
   useEffect(() => {
-    setChecked(parseParams(searchStr, isChecked, 'sort'))
-  }, [searchStr])
-  const sortHandle = (e) => {
-    const res = { ...initialState, [e.target.value]: !initialState[e.target.checked] }
-    setChecked((prev) => ({ ...prev, ...res }))
-  }
+    setChecked(parseParams(searchStr, isChecked, 'sort'));
+  }, [searchStr]);
+  const sortHandle = (e: any) => {
+    const res = { ...initialState, [e.target.value]: !initialState[e.target.checked] };
+    setChecked((prev) => ({ ...prev, ...res }));
+  };
   useEffect(() => {
-    const url = createParams(isChecked, 'sort', searchStr)
+    const url = createParams(isChecked, 'sort', searchStr);
     if (url !== '') {
-      history.push(url)
+      history.push(url);
     }
-  }, [isChecked])
+  }, [isChecked]);
 
   return (
     <Container className={styles.container}>
@@ -107,5 +116,5 @@ export default function SortRadioButtons() {
         ОПТИМАЛЬНЫЙ
       </label>
     </Container>
-  )
+  );
 }

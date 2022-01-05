@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* eslint-disable react/prop-types */
+=======
+>>>>>>> c86aedb7feaa14c16f23553e9b907b71d55efa14
 import React, { useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
