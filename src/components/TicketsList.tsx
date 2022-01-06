@@ -11,6 +11,26 @@ import { useLocation } from 'react-router-dom'
 import { Container } from '@material-ui/core'
 import Ticket from './Ticket'
 
+interface Segment {
+  date: string
+  duration: number | any
+  destination: number
+  origin: string
+  stops: string[]
+}
+interface TicketsDataArr {
+  ticket: number
+  price: number
+  segments: Segment[]
+  stops: Array<string>
+}
+interface TicketsData {
+  ticketsData: TicketsDataArr[]
+}
+interface Props {
+  ticketsData: TicketsData
+}
+
 const useStyles = makeStyles({
   container: {
     display: 'flex !important',
@@ -23,7 +43,8 @@ const useStyles = makeStyles({
   },
 })
 
-function TicketsList({ ticketsData: { ticketsData } }: any) {
+function TicketsList({ ticketsData: { ticketsData } }: Props) {
+  console.log(ticketsData)
   const { isLoaded } = store.getState()
   const [filteredTicketsData, setTicketsData] = useState(isLoaded ? ticketsData : [])
   const [paginationStep, SetPaginationStep] = useState(5)
@@ -60,9 +81,9 @@ function TicketsList({ ticketsData: { ticketsData } }: any) {
       <SortRadioButtons />
       {isLoaded &&
         filteredTicketsData?.length > 0 &&
-        filteredTicketsData?.map((ticket: any, index: any) => {
+        filteredTicketsData?.map((ticket, index) => {
           if (index < paginationStep) {
-            return <Ticket key={Math.random(ticket.price)} ticketData={ticket} />
+            return <Ticket key={Math.random() * ticket.price} ticketData={ticket} />
           }
           return null
         })}

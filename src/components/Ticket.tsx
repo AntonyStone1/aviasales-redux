@@ -7,9 +7,10 @@ import { ReactComponent as YourSvg } from 'src/img/S7_Logo.svg'
 
 interface Segment {
   date: string
-  duration: string
-  destination: string
+  duration: number | any
+  destination: number
   origin: string
+  stops: string[]
 }
 // interface Stops {
 //   stops: number[]
@@ -118,7 +119,7 @@ const Ticket = (props: Props) => {
     return `${h}ч ${m}м`
   }
   // eslint-disable-next-line consistent-return
-  const createTransferEndWord = (tiket: TicketData['stops']): string | undefined => {
+  const createTransferEndWord = (tiket: Segment): string | undefined => {
     if (tiket.stops.length === 0) {
       return `БЕЗ ПЕРЕСАДОК`
     }
