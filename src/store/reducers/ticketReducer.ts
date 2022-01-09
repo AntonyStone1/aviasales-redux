@@ -1,13 +1,19 @@
+import { IState } from 'src/types/IState'
 import initialState from 'src/store/initialState'
 import ACTIONS from 'src/store/actionTypes/actionTypes'
 
-function ticketReducer(state = initialState, action: any) {
+interface Action {
+  type: string
+  payload: []
+  isLoaded: boolean
+}
+
+function ticketReducer(state: IState = initialState, action: Action) {
   switch (action.type) {
     case ACTIONS.TICKET_DATA: {
       return {
         ...state,
         ticketsData: action.payload,
-        staticTicketData: action.payload,
         isLoaded: action.isLoaded,
       }
     }

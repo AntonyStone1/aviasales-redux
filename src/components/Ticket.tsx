@@ -1,26 +1,13 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import { Container, Typography } from '@material-ui/core'
 import { ReactComponent as YourSvg } from 'src/img/S7_Logo.svg'
+import { TicketData, ISegment } from 'src/types/TicketsData'
 
-interface Segment {
-  date: string
-  duration: number | any
-  destination: number
-  origin: string
-  stops: string[]
-}
-// interface Stops {
-//   stops: number[]
-// }
-interface TicketData {
-  price: number
-  segments: Segment[]
-  stops: Array<string>
-}
-interface Props {
+interface Ticket {
   ticketData: TicketData
 }
 const useStyles = makeStyles({
@@ -78,14 +65,13 @@ const useStyles = makeStyles({
   },
 })
 
-const Ticket = (props: Props) => {
-  const { ticketData } = props
+const Ticket: React.FC<Ticket> = ({ ticketData }) => {
   const styled = useStyles()
   const dataTicket1 = ticketData?.segments[0]
   const dataTicket2 = ticketData?.segments[1]
   const dateTicket1: Date = new Date(ticketData?.segments[0].date)
-  const durationTicket1 = ticketData?.segments[0].duration
   const dateTicket2: Date = new Date(ticketData?.segments[1].date)
+  const durationTicket1 = ticketData?.segments[0].duration
   const durationTicket2 = ticketData?.segments[1].duration
 
   const generatePriceIndent = (price: TicketData['price']) =>
@@ -97,12 +83,12 @@ const Ticket = (props: Props) => {
         return item
       })
       .join('')
-  const departureTime = (date: any) =>
+  const departureTime = (date: Date) =>
     `${date.getHours().toString().padStart(2, '0')}:${date
       .getMinutes()
       .toString()
       .padStart(2, '0')}`
-  const airrivalTime = (date: any, minutes: any) =>
+  const airrivalTime = (date: Date, minutes: number) =>
     `${new Date(date.getTime() + minutes * 60000)
       .getHours()
       .toString()
@@ -111,7 +97,7 @@ const Ticket = (props: Props) => {
       .toString()
       .padStart(2, '0')}`
 
-  const createTravelTimeStr = (minutes: any) => {
+  const createTravelTimeStr = (minutes: number) => {
     let h: number | string = Math.floor(minutes / 60)
     let m: number | string = minutes % 60
     h = h < 10 ? `0${h}` : h
@@ -119,7 +105,7 @@ const Ticket = (props: Props) => {
     return `${h}ч ${m}м`
   }
   // eslint-disable-next-line consistent-return
-  const createTransferEndWord = (tiket: Segment): string | undefined => {
+  const createTransferEndWord = (tiket: ISegment) => {
     if (tiket.stops.length === 0) {
       return `БЕЗ ПЕРЕСАДОК`
     }

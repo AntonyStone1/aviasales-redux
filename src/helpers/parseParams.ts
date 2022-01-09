@@ -1,14 +1,14 @@
-const parseSearchSrt = (str: any, initialFilters: any, param: any) => {
-  const result: any = {};
-  const paramsValue = new URLSearchParams(str)?.get(param)?.split(' ');
+const parseSearchSrt = (str: string, initialFilters: object, param: string) => {
+  const result: Record<string, boolean> = {}
+  const paramsValue = new URLSearchParams(str)?.get(param)?.split(' ')
   if (paramsValue && paramsValue?.length > 0) {
     paramsValue.forEach((item) => {
       if (item !== '' && item.split('')[0] !== '?') {
-        result[item] = true;
+        result[item] = true
       }
-    });
+    })
   }
-  return { ...initialFilters, ...result };
-};
+  return { ...initialFilters, ...result }
+}
 
-export default parseSearchSrt;
+export default parseSearchSrt

@@ -1,9 +1,7 @@
 const initialState = {
   searchId: '',
-  ticketsData: {},
-  staticTicketData: {},
+  ticketsData: [],
   isLoaded: false,
-  isChecked: false,
 }
 
 export default initialState

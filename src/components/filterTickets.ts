@@ -1,21 +1,33 @@
-export default function filterTickets(obj: any, data: any) {
-  let result = []
-  let filter1 = []
-  let filter2 = []
-  let filter3 = []
-  let filter4 = []
-  if (Array.from(data).length) {
+import { TicketData } from 'src/types/TicketsData'
+
+interface ParamObject {
+  noTransfer?: boolean
+  transferOne?: boolean
+  transferTwo?: boolean
+  transferThree?: boolean
+}
+
+export default function filterTickets(obj: ParamObject, data?: TicketData[]) {
+  let result: TicketData[] = []
+  let filter1: TicketData[] = []
+  let filter2: TicketData[] = []
+  let filter3: TicketData[] = []
+  let filter4: TicketData[] = []
+  if (data === undefined) {
+    return result
+  }
+  if (data.length) {
     if (obj.noTransfer) {
-      filter1 = data?.filter((item: any) => item.segments[0].stops.length === 0)
+      filter1 = data?.filter((item: TicketData) => item.segments[0].stops.length === 0)
     }
     if (obj.transferOne) {
-      filter2 = data?.filter((item: any) => item.segments[0].stops.length === 1)
+      filter2 = data?.filter((item: TicketData) => item.segments[0].stops.length === 1)
     }
     if (obj.transferTwo) {
-      filter3 = data?.filter((item: any) => item.segments[0].stops.length === 2)
+      filter3 = data?.filter((item: TicketData) => item.segments[0].stops.length === 2)
     }
     if (obj.transferThree) {
-      filter4 = data?.filter((item: any) => item.segments[0].stops.length === 3)
+      filter4 = data?.filter((item: TicketData) => item.segments[0].stops.length === 3)
     }
   }
   result = [...filter1, ...filter2, ...filter3, ...filter4]

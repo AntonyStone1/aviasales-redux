@@ -1,5 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
 import SortRadioButtons from 'src/components/SortRadioButtons'
 import filterTickets from 'src/components/filterTickets'
 import sortTickets from 'src/components/sortTickets'
@@ -9,28 +9,12 @@ import store from 'src/store/store'
 import TicketsListPgnBtn from 'src/components/Pagination/TicketsListPagBtn'
 import { useLocation } from 'react-router-dom'
 import { Container } from '@material-ui/core'
+import { TicketData } from 'src/types/TicketsData'
 import Ticket from './Ticket'
 
-interface Segment {
-  date: string
-  duration: number | any
-  destination: number
-  origin: string
-  stops: string[]
-}
-interface TicketsDataArr {
-  ticket: number
-  price: number
-  segments: Segment[]
-  stops: Array<string>
-}
 interface TicketsData {
-  ticketsData: TicketsDataArr[]
+  ticketsData: TicketData[]
 }
-interface Props {
-  ticketsData: TicketsData
-}
-
 const useStyles = makeStyles({
   container: {
     display: 'flex !important',
@@ -43,17 +27,17 @@ const useStyles = makeStyles({
   },
 })
 
-function TicketsList({ ticketsData: { ticketsData } }: Props) {
-  console.log(ticketsData)
+const TicketsList: React.FC<TicketsData> = ({ ticketsData }) => {
   const { isLoaded } = store.getState()
   const [filteredTicketsData, setTicketsData] = useState(isLoaded ? ticketsData : [])
   const [paginationStep, SetPaginationStep] = useState(5)
   const styles = useStyles()
   const searchStr = useLocation().search
   const searchParams = new URLSearchParams(searchStr)
+
   useEffect(() => {
     setTicketsData(ticketsData)
-    if (ticketsData.length > 0) {
+    if (ticketsData?.length > 0) {
       if (searchParams.has('sort') || searchParams.has('transfers')) {
         setTicketsData(
           sortTickets(
@@ -65,7 +49,7 @@ function TicketsList({ ticketsData: { ticketsData } }: Props) {
     }
   }, [isLoaded])
   useEffect(() => {
-    if (filteredTicketsData.length > 0) {
+    if (filteredTicketsData?.length > 0) {
       setTicketsData(
         sortTickets(
           parseParams(searchStr, {}, 'sort'),
@@ -81,7 +65,7 @@ function TicketsList({ ticketsData: { ticketsData } }: Props) {
       <SortRadioButtons />
       {isLoaded &&
         filteredTicketsData?.length > 0 &&
-        filteredTicketsData?.map((ticket, index) => {
+        filteredTicketsData?.map((ticket, index: number) => {
           if (index < paginationStep) {
             return <Ticket key={Math.random() * ticket.price} ticketData={ticket} />
           }
@@ -94,4 +78,4 @@ function TicketsList({ ticketsData: { ticketsData } }: Props) {
   )
 }
 
-export default connect((state) => ({ ticketsData: state }))(TicketsList)
+export default TicketsList

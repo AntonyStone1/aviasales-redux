@@ -1,6 +1,6 @@
-import React from 'react';
-import Button from '@mui/material/Button';
-import { makeStyles } from '@mui/styles';
+import React from 'react'
+import Button from '@mui/material/Button'
+import { makeStyles } from '@mui/styles'
 
 const useStyles = makeStyles({
   paginationBtn: {
@@ -8,15 +8,15 @@ const useStyles = makeStyles({
     height: '50px',
     marginBottom: '30px !important',
   },
-});
+})
 
 const TicketsListPgnBtn = ({ clickHandler }: any) => {
-  const styles = useStyles();
+  const styles = useStyles()
   return (
     <Button variant="contained" onClick={clickHandler} className={styles.paginationBtn}>
       Показать еще 5 билетов!
     </Button>
-  );
-};
+  )
+}
 
-export default TicketsListPgnBtn;
+export default TicketsListPgnBtn
