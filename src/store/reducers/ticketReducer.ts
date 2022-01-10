@@ -1,14 +1,14 @@
 import { IState } from 'src/types/IState'
 import initialState from 'src/store/initialState'
 import ACTIONS from 'src/store/actionTypes/actionTypes'
+import { Action } from 'redux'
 
-interface Action {
-  type: string
+interface Actions extends Action {
   payload: []
   isLoaded: boolean
 }
 
-function ticketReducer(state: IState = initialState, action: Action) {
+function ticketReducer(state: IState = initialState, action: Actions) {
   switch (action.type) {
     case ACTIONS.TICKET_DATA: {
       return {

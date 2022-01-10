@@ -6,10 +6,8 @@ import { ReactComponent as Logo } from 'src/img/Logo.svg'
 import CheckboxPanel from 'src/components/CheckboxPanel'
 import TicketsList from 'src/components/TicketsList'
 import { Switch, Route, Redirect } from 'react-router'
-import store from 'src/store/store'
 import getTicketsData from 'src/store/action/getTicketsData'
-import { useSelector } from 'react-redux'
-import { TicketData } from './types/TicketsData'
+import { useDispatch, useSelector } from 'react-redux'
 import { IState } from './types/IState'
 
 const useStyles = makeStyles({
@@ -30,11 +28,12 @@ const useStyles = makeStyles({
 
 function App() {
   const styles = useStyles()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    store.dispatch(getTicketsData)
+    dispatch(getTicketsData)
   }, [])
-  const data: TicketData[] = useSelector((state: IState) => state.ticketsData)
+  const data = useSelector((state: IState) => state.ticketsData)
 
   return (
     <Switch>
