@@ -1,4 +1,4 @@
-import { TicketData } from 'src/types/TicketsData'
+import { TicketData } from '../../types/TicketsData'
 
 const sortTickets = (obj: Record<string, boolean>, data: TicketData[]) => {
   const result = data

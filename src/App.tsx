@@ -3,11 +3,11 @@ import React, { useEffect } from 'react'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import { ReactComponent as Logo } from 'src/img/Logo.svg'
-import CheckboxPanel from 'src/components/CheckboxPanel'
-import TicketsList from 'src/components/TicketsList'
 import { Switch, Route, Redirect } from 'react-router'
 import getTicketsData from 'src/store/action/getTicketsData'
 import { useDispatch, useSelector } from 'react-redux'
+import TicketsList from './components/TicketsList/TicketsList'
+import CheckboxPanel from './components/CheckboxPanel/CheckboxPanel'
 import { IState } from './types/IState'
 
 const useStyles = makeStyles({

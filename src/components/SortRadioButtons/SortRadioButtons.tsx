@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react'
-import parseParams from 'src/helpers/parseParams'
-import createParams from 'src/helpers/createParams'
 import { makeStyles } from '@mui/styles'
 import { useHistory, useLocation } from 'react-router'
 import { Container } from '@material-ui/core'
+import createParams from '../../helpers/createParams'
+import parseParams from '../../helpers/parseParams'
 
 const useStyles = makeStyles({
   container: {
@@ -12,6 +11,7 @@ const useStyles = makeStyles({
     height: '50px',
     padding: '0 20px 0 20px !important',
     marginBottom: '4%',
+    border: 'none',
     borderRadius: '5px !important',
   },
   radioBtn: {
@@ -38,6 +38,13 @@ const useStyles = makeStyles({
     borderBottomRightRadius: '5px',
     borderTopRightRadius: '5px',
   },
+  span: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
 })
 
 export default function SortRadioButtons() {
@@ -49,59 +56,59 @@ export default function SortRadioButtons() {
     speed: false,
     optimal: false,
   }
-  const [isChecked, setChecked] = useState(initialState)
+  const [state, setState] = useState(initialState)
 
   useEffect(() => {
-    setChecked(parseParams(searchStr, isChecked, 'sort'))
+    setState(parseParams(searchStr, state, 'sort'))
   }, [searchStr])
   const sortHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const res = { ...initialState, [e.target.value]: !initialState[e.target.value] }
-    setChecked((prev) => ({ ...prev, ...res }))
+    setState((prev) => ({ ...prev, ...res }))
   }
   useEffect(() => {
-    const url = createParams(isChecked, 'sort', searchStr)
+    const url = createParams(state, 'sort', searchStr)
     if (url !== '') {
       history.push(url)
     }
-  }, [isChecked])
+  }, [state])
 
   return (
     <Container className={styles.container}>
-      <input
-        type="radio"
-        name="sort"
-        value="price"
-        className={styles.radioBtn}
-        id="1"
-        onChange={sortHandle}
-        checked={isChecked.price}
-      />
       <label htmlFor="1" className={styles.label}>
-        САМЫЙ ДЕШЕВЫЙ
+        <input
+          type="radio"
+          name="sort"
+          value="price"
+          className={styles.radioBtn}
+          id="1"
+          onChange={sortHandle}
+          checked={state.price}
+        />
+        <span className={styles.span}>САМЫЙ ДЕШЕВЫЙ</span>
       </label>
-      <input
-        type="radio"
-        name="sort"
-        value="speed"
-        className={styles.radioBtn}
-        id="2"
-        onChange={sortHandle}
-        checked={isChecked.speed}
-      />
       <label htmlFor="2" className={styles.label}>
-        САМЫЙ БЫСТРЫЙ
+        <input
+          type="radio"
+          name="sort"
+          value="speed"
+          className={styles.radioBtn}
+          id="2"
+          onChange={sortHandle}
+          checked={state.speed}
+        />
+        <span className={styles.span}>САМЫЙ БЫСТРЫЙ</span>
       </label>
-      <input
-        type="radio"
-        name="sort"
-        value="optimal"
-        className={styles.radioBtn}
-        id="3"
-        onChange={sortHandle}
-        checked={isChecked.optimal}
-      />
       <label htmlFor="3" className={styles.label}>
-        ОПТИМАЛЬНЫЙ
+        <input
+          type="radio"
+          name="sort"
+          value="optimal"
+          className={styles.radioBtn}
+          id="3"
+          onChange={sortHandle}
+          checked={state.optimal}
+        />
+        <span className={styles.span}>ОПТИМАЛЬНЫЙ</span>
       </label>
     </Container>
   )

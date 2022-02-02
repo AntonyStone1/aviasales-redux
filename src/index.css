@@ -12,9 +12,9 @@ label {
 label:hover {
   background-color: #f1fcff;
 }
-input[type='radio']:checked + label {
+[type='radio']:checked + span {
   color: #fff;
-  background-color: #2196f3;
+  background-color: #2196f3 !important;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;

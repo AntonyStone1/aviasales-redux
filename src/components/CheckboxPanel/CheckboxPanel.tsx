@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react'
 import Checkbox from '@mui/material/Checkbox'
-import parseParams from 'src/helpers/parseParams'
-import createParams from 'src/helpers/createParams'
 import { makeStyles } from '@mui/styles'
 import { useHistory, useLocation } from 'react-router-dom'
 import { Typography, Container, Box } from '@material-ui/core'
+import createParams from '../../helpers/createParams'
+import parseParams from '../../helpers/parseParams'
 
 const useStyles = makeStyles({
   container: {

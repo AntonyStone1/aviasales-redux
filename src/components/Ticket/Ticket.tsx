@@ -4,8 +4,8 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
 import { Container, Typography } from '@material-ui/core'
-import { ReactComponent as YourSvg } from 'src/img/S7_Logo.svg'
-import { TicketData, ISegment } from 'src/types/TicketsData'
+import { ReactComponent as YourSvg } from '../../img/S7_Logo.svg'
+import { TicketData, ISegment } from '../../types/TicketsData'
 
 interface Ticket {
   ticketData: TicketData
@@ -66,6 +66,8 @@ const useStyles = makeStyles({
 })
 
 const Ticket: React.FC<Ticket> = ({ ticketData }) => {
+  console.log(ticketData)
+
   const styled = useStyles()
   const dataTicket1 = ticketData?.segments[0]
   const dataTicket2 = ticketData?.segments[1]
@@ -122,7 +124,7 @@ const Ticket: React.FC<Ticket> = ({ ticketData }) => {
     <Container className={styled.container}>
       <Box className={styled.ticketContainer}>
         <Box className={styled.priceLogo}>
-          <Typography variant="h4" className={styled.priceText}>
+          <Typography variant="h4" className={styled.priceText} data-testid="ticket-price">
             {generatePriceIndent(ticketData.price)} P
           </Typography>
           <YourSvg />

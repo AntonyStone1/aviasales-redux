@@ -1,4 +1,4 @@
-const parseSearchSrt = (str: string, initialFilters: object, param: string) => {
+const parseSearchSrt = (str: string, initialFilters: Record<string, boolean>, param: string) => {
   const result: Record<string, boolean> = {}
   const paramsValue = new URLSearchParams(str)?.get(param)?.split(' ')
   if (paramsValue && paramsValue?.length > 0) {

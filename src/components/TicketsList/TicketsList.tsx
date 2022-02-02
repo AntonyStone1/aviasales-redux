@@ -1,16 +1,16 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState } from 'react'
-import SortRadioButtons from 'src/components/SortRadioButtons'
-import filterTickets from 'src/components/filterTickets'
-import sortTickets from 'src/components/sortTickets'
-import parseParams from 'src/helpers/parseParams'
 import { makeStyles } from '@mui/styles'
-import store from 'src/store/store'
-import TicketsListPgnBtn from 'src/components/Pagination/TicketsListPagBtn'
 import { useLocation } from 'react-router-dom'
-import { Container } from '@material-ui/core'
-import { TicketData } from 'src/types/TicketsData'
-import Ticket from './Ticket'
+import { Container, CircularProgress } from '@material-ui/core'
+import filterTickets from '../CheckboxPanel/filterTickets'
+import sortTickets from '../SortRadioButtons/sortTickets'
+import parseParams from '../../helpers/parseParams'
+import store from '../../store/store'
+import TicketsListPgnBtn from '../Pagination/TicketsListPagBtn'
+import { TicketData } from '../../types/TicketsData'
+import SortRadioButtons from '../SortRadioButtons/SortRadioButtons'
+import Ticket from '../Ticket/Ticket'
 
 interface TicketsData {
   ticketsData: TicketData[]
@@ -60,17 +60,21 @@ const TicketsList: React.FC<TicketsData> = ({ ticketsData }) => {
   }, [searchStr])
 
   const clickHandler = () => SetPaginationStep((prev) => prev + 5)
+  console.log(ticketsData)
+
   return (
     <Container className={styles.container}>
       <SortRadioButtons />
-      {isLoaded &&
-        filteredTicketsData?.length > 0 &&
+      {isLoaded ? (
         filteredTicketsData?.map((ticket, index: number) => {
           if (index < paginationStep) {
             return <Ticket key={Math.random() * ticket.price} ticketData={ticket} />
           }
           return null
-        })}
+        })
+      ) : (
+        <CircularProgress style={{ margin: 'auto', marginBottom: '30px' }} />
+      )}
       <Container>
         <TicketsListPgnBtn clickHandler={clickHandler} />
       </Container>

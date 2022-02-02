@@ -1,4 +1,4 @@
-import { TicketData } from 'src/types/TicketsData'
+import { TicketData } from '../../types/TicketsData'
 
 interface ParamObject {
   noTransfer?: boolean

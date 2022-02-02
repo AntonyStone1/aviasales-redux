@@ -15,8 +15,8 @@ async function getTicketData(
 ) {
   const response = await getKey()
   const getData = () => apiClient.get(PATHS.getTicketsData + response.data.searchId)
-  const data = await getData()
-  dispatch<any>({ type: 'TICKET_DATA', payload: data.data.tickets, isLoaded: true })
+  const { data } = await getData()
+  dispatch<any>({ type: 'TICKET_DATA', payload: data.tickets, isLoaded: true })
 }
 
 export default getTicketData

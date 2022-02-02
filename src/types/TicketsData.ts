@@ -8,5 +8,6 @@ export interface ISegment {
 
 export interface TicketData {
   price: number
+  carrier: string
   segments: ISegment[]
 }
