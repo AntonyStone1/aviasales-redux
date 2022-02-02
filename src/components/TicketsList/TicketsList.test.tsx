@@ -120,7 +120,7 @@ describe('Component render', () => {
     const ticketsPrice = getAllByTestId('ticket-price')?.map((ticket) =>
       ticket.textContent == null
         ? ticket
-        : +ticket?.textContent.split('P').join('').split(' ').join(''),
+        : +ticket.textContent.split('P').join('').split(' ').join(''),
     )
 
     console.log('11111111', ticketsPrice)
