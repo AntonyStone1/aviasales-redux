@@ -28,6 +28,8 @@ const useStyles = makeStyles({
     paddingRight: '0 !important',
   },
   checkboxPanel: {
+    display: 'flex',
+    flexDirection: 'column',
     height: '230px',
     backgroundColor: '#fff',
     borderRadius: '5px',
